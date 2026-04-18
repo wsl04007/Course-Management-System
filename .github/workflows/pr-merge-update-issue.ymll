@@ -1,0 +1,43 @@
+name: PR Merge - Update Issue Status
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  update-issue-status:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract issue number from PR body
+        id: extract
+        run: |
+          PR_BODY="${{ github.event.pull_request.body }}"
+          ISSUE_NUM=$(echo "$PR_BODY" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
+          echo "issue_number=$ISSUE_NUM" >> $GITHUB_OUTPUT
+          echo "Extracted issue #: $ISSUE_NUM"
+
+      - name: Update issue status to Done
+        if: steps.extract.outputs.issue_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_NUM="${{ steps.extract.outputs.issue_number }}"
+          REPO="${{ github.repository }}"
+          
+          gh issue edit $ISSUE_NUM --repo $REPO --add-label "Done"
+          gh issue comment $ISSUE_NUM --repo $REPO --body \
+            "✅ PR #${{ github.event.pull_request.number }} 已合并，该问题已完成。"
+          
+          echo "已更新 Issue #$ISSUE_NUM 状态为 Done"
+
+      - name: Warning if no issue linked
+        if: steps.extract.outputs.issue_number == ''
+        run: |
+          echo "⚠️ 警告：PR描述中未找到关联的Issue编号（格式如 #123）"
