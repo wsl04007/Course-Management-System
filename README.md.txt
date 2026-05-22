@@ -19,15 +19,15 @@ Course-Management-System（课程管理系统）
 管理员可灵活配置系统核心参数，包括选课时间、学分上限、课表规则、成绩核算标准等；支持系统日志查看、消息通知配置（选课提醒、成绩发布通知），适配不同院校的教务管理需求。
 可选补充内容（根据项目需求添加）
 项目环境配置
-开发工具：XXX（如 IntelliJ IDEA、VS Code）
-开发语言：XXX（如 Java、Vue.js）
-依赖包：XXX（可列出核心依赖）
+开发工具：idea
+开发语言：java
+依赖包：
 项目启动步骤
 克隆远程仓库：git clone https://github.com/[组长用户名]/Course-Management-System.git
 进入项目目录：cd Course-Management-System
 安装依赖：XXX（如 npm install、mvn install）
-配置环境变量：XXX（根据项目实际配置）
-启动项目：XXX（如 npm run dev、java -jar XXX.jar）
+配置环境变量：
+启动项目：
 团队分工
 组长：伍思龙（负责项目统筹、仓库管理、需求梳理，负责数据库设计、数据统计功能开发）
 成员 1：温彭涛（负责前端页面开发，负责后端接口开发）
