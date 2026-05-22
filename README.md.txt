@@ -21,11 +21,11 @@ Course-Management-System（课程管理系统）
 项目环境配置
 开发工具：idea
 开发语言：java
-依赖包：
+依赖包：Maven - pom.xml
 项目启动步骤
 克隆远程仓库：git clone https://github.com/[组长用户名]/Course-Management-System.git
 进入项目目录：cd Course-Management-System
-安装依赖：XXX（如 npm install、mvn install）
+安装依赖：
 配置环境变量：
 启动项目：
 团队分工
